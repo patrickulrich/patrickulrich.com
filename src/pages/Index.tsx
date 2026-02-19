@@ -303,12 +303,32 @@ const Index = () => {
 
             <div className="flex items-center gap-6">
               <a 
-                href="https://shakespeare.diy" 
+                href="https://nostr.blue" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="text-muted-foreground hover:text-bitcoin transition-colors text-sm"
+                className="text-muted-foreground hover:text-sovereign transition-colors"
+                title="nostr.blue"
               >
-                Built with Shakespeare
+                <svg 
+                  viewBox="0 0 24 24" 
+                  className="w-6 h-6" 
+                  fill="none" 
+                  stroke="currentColor" 
+                  strokeWidth="1.5"
+                >
+                  <circle cx="12" cy="12" r="10" />
+                  <text 
+                    x="12" 
+                    y="16" 
+                    textAnchor="middle" 
+                    fontSize="12" 
+                    fontWeight="bold" 
+                    fill="currentColor"
+                    stroke="none"
+                  >
+                    N
+                  </text>
+                </svg>
               </a>
             </div>
           </div>
