@@ -288,18 +288,13 @@ const Index = () => {
       <footer className="py-12 border-t">
         <div className="container mx-auto px-4">
           <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-            <a 
-              href={NOSTR_PROFILE_URL} 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="flex items-center gap-3 hover:opacity-80 transition-opacity"
-            >
+            <div className="flex items-center gap-3">
               <Avatar className="w-10 h-10">
                 <AvatarImage src={AVATAR_URL} alt="Patrick Ulrich" />
                 <AvatarFallback className="gradient-bitcoin text-white">PU</AvatarFallback>
               </Avatar>
               <span className="font-semibold text-lg">Patrick Ulrich</span>
-            </a>
+            </div>
 
             <div className="flex items-center gap-6">
               <a 
