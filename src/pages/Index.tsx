@@ -7,6 +7,8 @@ import { ZapPersonButton } from '@/components/ZapPersonButton';
 import { cn } from '@/lib/utils';
 
 const PATRICK_PUBKEY = 'npub1patrlck0muvqevgytp4etpen0xsvrlw0hscp4qxgy40n852lqwwsz79h9a';
+const PATRICK_HEX_PUBKEY = '0f563fe2cfdf180cb104586b95873379a0c1fdcfbc301a80c8255f33d15f039d';
+const NOSTR_PROFILE_URL = `https://nostr.blue/profile/${PATRICK_HEX_PUBKEY}`;
 const AVATAR_URL = 'https://relay.patrickulrich.com/8376dba8728c2672acc10b7a5fce3f7cbde9299a4c0151b34b6a431d48715652.png';
 const BANNER_URL = 'https://m.primal.net/HhVD.jpg';
 const LIGHTNING_ADDRESS = 'patrick@sats.love';
@@ -72,10 +74,12 @@ const Index = () => {
           {/* Avatar */}
           <div className="relative inline-block mb-8">
             <div className="absolute inset-0 gradient-bitcoin rounded-full blur-xl opacity-50 animate-pulse-glow scale-110" />
-            <Avatar className="w-40 h-40 md:w-52 md:h-52 border-4 border-background shadow-2xl relative z-10">
-              <AvatarImage src={AVATAR_URL} alt="Patrick Ulrich" className="object-cover" />
-              <AvatarFallback className="text-4xl gradient-bitcoin text-white">PU</AvatarFallback>
-            </Avatar>
+            <a href={NOSTR_PROFILE_URL} target="_blank" rel="noopener noreferrer" className="block">
+              <Avatar className="w-40 h-40 md:w-52 md:h-52 border-4 border-background shadow-2xl relative z-10 cursor-pointer hover:scale-105 transition-transform duration-300">
+                <AvatarImage src={AVATAR_URL} alt="Patrick Ulrich" className="object-cover" />
+                <AvatarFallback className="text-4xl gradient-bitcoin text-white">PU</AvatarFallback>
+              </Avatar>
+            </a>
           </div>
 
           {/* Name */}
@@ -100,15 +104,17 @@ const Index = () => {
               className="gradient-bitcoin text-white font-semibold px-8 py-6 text-lg rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
             />
             <Button 
+              asChild
               variant="outline" 
               size="lg"
-              onClick={copyNostrAddress}
               className="px-8 py-6 text-lg rounded-full border-2 hover:border-bitcoin hover:text-bitcoin transition-all duration-300"
             >
-              <svg className="w-5 h-5 mr-2" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/>
-              </svg>
-              Copy Nostr Address
+              <a href={NOSTR_PROFILE_URL} target="_blank" rel="noopener noreferrer">
+                <svg className="w-5 h-5 mr-2" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/>
+                </svg>
+                View on Nostr
+              </a>
             </Button>
           </div>
 
@@ -201,11 +207,13 @@ const Index = () => {
               <Card className="group hover:border-bitcoin/50 transition-all duration-300 overflow-hidden">
                 <CardContent className="p-6">
                   <div className="flex items-center gap-4 mb-4">
-                    <div className="w-12 h-12 rounded-full gradient-bitcoin flex items-center justify-center text-white text-xl">
+                    <a href={NOSTR_PROFILE_URL} target="_blank" rel="noopener noreferrer" className="w-12 h-12 rounded-full gradient-bitcoin flex items-center justify-center text-white text-xl hover:opacity-90 transition-opacity">
                       🔮
-                    </div>
+                    </a>
                     <div>
-                      <h3 className="font-semibold text-lg">Nostr Profile</h3>
+                      <a href={NOSTR_PROFILE_URL} target="_blank" rel="noopener noreferrer" className="font-semibold text-lg hover:text-bitcoin transition-colors">
+                        Nostr Profile
+                      </a>
                       <p className="text-sm text-muted-foreground">npub1patr...</p>
                     </div>
                   </div>
@@ -214,13 +222,23 @@ const Index = () => {
                       {PATRICK_PUBKEY}
                     </code>
                   </div>
-                  <Button 
-                    variant="outline" 
-                    className="w-full group-hover:bg-bitcoin group-hover:text-white transition-colors"
-                    onClick={copyNostrAddress}
-                  >
-                    Copy Address
-                  </Button>
+                  <div className="flex gap-2">
+                    <Button 
+                      asChild
+                      className="flex-1 gradient-bitcoin text-white"
+                    >
+                      <a href={NOSTR_PROFILE_URL} target="_blank" rel="noopener noreferrer">
+                        View Profile
+                      </a>
+                    </Button>
+                    <Button 
+                      variant="outline"
+                      onClick={copyNostrAddress}
+                      className="flex-1"
+                    >
+                      Copy Address
+                    </Button>
+                  </div>
                 </CardContent>
               </Card>
 
@@ -284,13 +302,18 @@ const Index = () => {
       <footer className="py-12 border-t">
         <div className="container mx-auto px-4">
           <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-            <div className="flex items-center gap-3">
+            <a 
+              href={NOSTR_PROFILE_URL} 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="flex items-center gap-3 hover:opacity-80 transition-opacity"
+            >
               <Avatar className="w-10 h-10">
                 <AvatarImage src={AVATAR_URL} alt="Patrick Ulrich" />
                 <AvatarFallback className="gradient-bitcoin text-white">PU</AvatarFallback>
               </Avatar>
               <span className="font-semibold text-lg">Patrick Ulrich</span>
-            </div>
+            </a>
 
             <div className="flex items-center gap-6">
               <a 
