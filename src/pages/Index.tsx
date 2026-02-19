@@ -85,7 +85,7 @@ const Index = () => {
 
           {/* Tagline */}
           <p className="text-xl md:text-2xl lg:text-3xl text-foreground font-medium mb-4 max-w-2xl mx-auto">
-            Bitcoin Advocate & Digital Sovereignty
+            Bitcoin & Digital Sovereignty Advocate
           </p>
 
           {/* Subtitle */}
