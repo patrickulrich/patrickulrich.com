@@ -200,14 +200,14 @@ const Index = () => {
 
             <div className="grid gap-6 md:grid-cols-2">
               {/* Nostr Profile Card */}
-              <Card className="group hover:border-bitcoin/50 transition-all duration-300 overflow-hidden">
+              <Card className="group hover:border-sovereign/50 transition-all duration-300 overflow-hidden">
                 <CardContent className="p-6">
                   <div className="flex items-center gap-4 mb-6">
-                    <a href={NOSTR_PROFILE_URL} target="_blank" rel="noopener noreferrer" className="w-14 h-14 rounded-full gradient-bitcoin flex items-center justify-center text-white text-2xl hover:opacity-90 transition-opacity">
-                      🔮
+                    <a href={NOSTR_PROFILE_URL} target="_blank" rel="noopener noreferrer" className="w-14 h-14 rounded-full bg-sovereign flex items-center justify-center text-white text-2xl hover:opacity-90 transition-opacity">
+                      🌐
                     </a>
                     <div>
-                      <a href={NOSTR_PROFILE_URL} target="_blank" rel="noopener noreferrer" className="font-semibold text-xl hover:text-bitcoin transition-colors">
+                      <a href={NOSTR_PROFILE_URL} target="_blank" rel="noopener noreferrer" className="font-semibold text-xl hover:text-sovereign transition-colors">
                         nostr.blue
                       </a>
                       <p className="text-sm text-muted-foreground">Follow me on Nostr</p>
@@ -218,7 +218,7 @@ const Index = () => {
                   </p>
                   <Button 
                     asChild
-                    className="w-full gradient-bitcoin text-white"
+                    className="w-full bg-sovereign hover:bg-sovereign/90 text-white"
                   >
                     <a href={NOSTR_PROFILE_URL} target="_blank" rel="noopener noreferrer">
                       View Profile on nostr.blue
@@ -228,14 +228,14 @@ const Index = () => {
               </Card>
 
               {/* Undiscovered Web Card */}
-              <Card className="group hover:border-sovereign/50 transition-all duration-300 overflow-hidden">
+              <Card className="group hover:border-foreground/30 dark:hover:border-foreground/50 transition-all duration-300 overflow-hidden">
                 <CardContent className="p-6">
                   <div className="flex items-center gap-4 mb-6">
-                    <a href={UNDISCOVERED_WEB_URL} target="_blank" rel="noopener noreferrer" className="w-14 h-14 rounded-full bg-sovereign flex items-center justify-center text-white text-2xl hover:opacity-90 transition-opacity">
+                    <a href={UNDISCOVERED_WEB_URL} target="_blank" rel="noopener noreferrer" className="w-14 h-14 rounded-full bg-foreground flex items-center justify-center text-background text-2xl hover:opacity-90 transition-opacity">
                       🌐
                     </a>
                     <div>
-                      <a href={UNDISCOVERED_WEB_URL} target="_blank" rel="noopener noreferrer" className="font-semibold text-xl hover:text-sovereign transition-colors">
+                      <a href={UNDISCOVERED_WEB_URL} target="_blank" rel="noopener noreferrer" className="font-semibold text-xl hover:text-foreground/80 transition-colors">
                         Undiscovered Web
                       </a>
                       <p className="text-sm text-muted-foreground">Explore the decentralized web</p>
@@ -246,7 +246,7 @@ const Index = () => {
                   </p>
                   <Button 
                     asChild
-                    className="w-full bg-sovereign hover:bg-sovereign/90 text-white"
+                    className="w-full bg-foreground hover:bg-foreground/90 text-background"
                   >
                     <a href={UNDISCOVERED_WEB_URL} target="_blank" rel="noopener noreferrer">
                       Learn More
