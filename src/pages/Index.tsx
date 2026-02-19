@@ -298,6 +298,22 @@ const Index = () => {
 
             <div className="flex items-center gap-6">
               <a 
+                href="mailto:ulrich.patrickr@gmail.com" 
+                className="text-muted-foreground hover:text-foreground transition-colors"
+                title="Email"
+              >
+                <svg 
+                  viewBox="0 0 24 24" 
+                  className="w-6 h-6" 
+                  fill="none" 
+                  stroke="currentColor" 
+                  strokeWidth="1.5"
+                >
+                  <rect x="2" y="4" width="20" height="16" rx="2" />
+                  <path d="M22 6l-10 7L2 6" />
+                </svg>
+              </a>
+              <a 
                 href="https://github.com/patrickulrich" 
                 target="_blank" 
                 rel="noopener noreferrer"
