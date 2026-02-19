@@ -314,6 +314,25 @@ const Index = () => {
                 </svg>
               </a>
               <a 
+                href="https://signal.me/#eu/VNpJ0WvIp1vsQH5sXjatFf_wPZCFvXwG7t6n__lp1rASP8QY2apMcbtZVKDZtBtS" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-muted-foreground hover:text-foreground transition-colors"
+                title="Signal"
+              >
+                <svg 
+                  viewBox="0 0 24 24" 
+                  className="w-6 h-6" 
+                  fill="none" 
+                  stroke="currentColor" 
+                  strokeWidth="2"
+                  strokeLinecap="round" 
+                  strokeLinejoin="round"
+                >
+                  <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+                </svg>
+              </a>
+              <a 
                 href="https://github.com/patrickulrich" 
                 target="_blank" 
                 rel="noopener noreferrer"
