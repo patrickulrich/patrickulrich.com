@@ -6,12 +6,12 @@ import { Card, CardContent } from '@/components/ui/card';
 import { ZapPersonButton } from '@/components/ZapPersonButton';
 import { cn } from '@/lib/utils';
 
-const PATRICK_PUBKEY = 'npub1patrlck0muvqevgytp4etpen0xsvrlw0hscp4qxgy40n852lqwwsz79h9a';
 const PATRICK_HEX_PUBKEY = '0f563fe2cfdf180cb104586b95873379a0c1fdcfbc301a80c8255f33d15f039d';
 const NOSTR_PROFILE_URL = `https://nostr.blue/profile/${PATRICK_HEX_PUBKEY}`;
 const AVATAR_URL = 'https://relay.patrickulrich.com/8376dba8728c2672acc10b7a5fce3f7cbde9299a4c0151b34b6a431d48715652.png';
 const BANNER_URL = 'https://m.primal.net/HhVD.jpg';
 const LIGHTNING_ADDRESS = 'patrick@sats.love';
+const UNDISCOVERED_WEB_URL = 'https://undiscoveredweb.com/';
 
 const Index = () => {
   useSeoMeta({
@@ -33,10 +33,6 @@ const Index = () => {
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
-
-  const copyNostrAddress = () => {
-    navigator.clipboard.writeText(PATRICK_PUBKEY);
-  };
 
   return (
     <div className="min-h-screen bg-background">
@@ -188,17 +184,17 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Connections Section */}
+      {/* Explore Section */}
       <section className="py-24 md:py-32 relative bg-muted/30">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
             <div className="text-center mb-16">
               <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
-                <span className="text-foreground">Connect </span>
-                <span className="text-gradient-bitcoin">With Me</span>
+                <span className="text-foreground">Explore </span>
+                <span className="text-gradient-bitcoin">More</span>
               </h2>
               <p className="text-lg text-muted-foreground max-w-xl mx-auto">
-                Reach out on Nostr, the decentralized social network built on principles of freedom and censorship resistance.
+                Connect and discover more about the decentralized ecosystem.
               </p>
             </div>
 
@@ -206,65 +202,55 @@ const Index = () => {
               {/* Nostr Profile Card */}
               <Card className="group hover:border-bitcoin/50 transition-all duration-300 overflow-hidden">
                 <CardContent className="p-6">
-                  <div className="flex items-center gap-4 mb-4">
-                    <a href={NOSTR_PROFILE_URL} target="_blank" rel="noopener noreferrer" className="w-12 h-12 rounded-full gradient-bitcoin flex items-center justify-center text-white text-xl hover:opacity-90 transition-opacity">
+                  <div className="flex items-center gap-4 mb-6">
+                    <a href={NOSTR_PROFILE_URL} target="_blank" rel="noopener noreferrer" className="w-14 h-14 rounded-full gradient-bitcoin flex items-center justify-center text-white text-2xl hover:opacity-90 transition-opacity">
                       🔮
                     </a>
                     <div>
-                      <a href={NOSTR_PROFILE_URL} target="_blank" rel="noopener noreferrer" className="font-semibold text-lg hover:text-bitcoin transition-colors">
-                        Nostr Profile
+                      <a href={NOSTR_PROFILE_URL} target="_blank" rel="noopener noreferrer" className="font-semibold text-xl hover:text-bitcoin transition-colors">
+                        nostr.blue
                       </a>
-                      <p className="text-sm text-muted-foreground">npub1patr...</p>
+                      <p className="text-sm text-muted-foreground">Follow me on Nostr</p>
                     </div>
                   </div>
-                  <div className="bg-muted/50 rounded-lg p-3 mb-4 overflow-x-auto">
-                    <code className="text-xs md:text-sm text-muted-foreground whitespace-nowrap">
-                      {PATRICK_PUBKEY}
-                    </code>
-                  </div>
-                  <div className="flex gap-2">
-                    <Button 
-                      asChild
-                      className="flex-1 gradient-bitcoin text-white"
-                    >
-                      <a href={NOSTR_PROFILE_URL} target="_blank" rel="noopener noreferrer">
-                        View Profile
-                      </a>
-                    </Button>
-                    <Button 
-                      variant="outline"
-                      onClick={copyNostrAddress}
-                      className="flex-1"
-                    >
-                      Copy Address
-                    </Button>
-                  </div>
+                  <p className="text-muted-foreground mb-6">
+                    Connect with me on the decentralized social network. View my posts, interactions, and more on nostr.blue.
+                  </p>
+                  <Button 
+                    asChild
+                    className="w-full gradient-bitcoin text-white"
+                  >
+                    <a href={NOSTR_PROFILE_URL} target="_blank" rel="noopener noreferrer">
+                      View Profile on nostr.blue
+                    </a>
+                  </Button>
                 </CardContent>
               </Card>
 
-              {/* Lightning Address Card */}
-              <Card className="group hover:border-gold/50 transition-all duration-300 overflow-hidden">
+              {/* Undiscovered Web Card */}
+              <Card className="group hover:border-sovereign/50 transition-all duration-300 overflow-hidden">
                 <CardContent className="p-6">
-                  <div className="flex items-center gap-4 mb-4">
-                    <div className="w-12 h-12 rounded-full bg-gold flex items-center justify-center text-white text-xl">
-                      ⚡
-                    </div>
+                  <div className="flex items-center gap-4 mb-6">
+                    <a href={UNDISCOVERED_WEB_URL} target="_blank" rel="noopener noreferrer" className="w-14 h-14 rounded-full bg-sovereign flex items-center justify-center text-white text-2xl hover:opacity-90 transition-opacity">
+                      🌐
+                    </a>
                     <div>
-                      <h3 className="font-semibold text-lg">Lightning Address</h3>
-                      <p className="text-sm text-muted-foreground">Send sats via Lightning</p>
+                      <a href={UNDISCOVERED_WEB_URL} target="_blank" rel="noopener noreferrer" className="font-semibold text-xl hover:text-sovereign transition-colors">
+                        Undiscovered Web
+                      </a>
+                      <p className="text-sm text-muted-foreground">Explore the decentralized web</p>
                     </div>
                   </div>
-                  <div className="bg-muted/50 rounded-lg p-3 mb-4 overflow-x-auto">
-                    <code className="text-xs md:text-sm text-muted-foreground whitespace-nowrap">
-                      {LIGHTNING_ADDRESS}
-                    </code>
-                  </div>
+                  <p className="text-muted-foreground mb-6">
+                    Discover the future of the internet. Learn about decentralized technologies, sovereign identity, and digital freedom.
+                  </p>
                   <Button 
-                    variant="outline" 
-                    className="w-full group-hover:bg-gold group-hover:text-white transition-colors"
-                    onClick={() => navigator.clipboard.writeText(LIGHTNING_ADDRESS)}
+                    asChild
+                    className="w-full bg-sovereign hover:bg-sovereign/90 text-white"
                   >
-                    Copy Address
+                    <a href={UNDISCOVERED_WEB_URL} target="_blank" rel="noopener noreferrer">
+                      Learn More
+                    </a>
                   </Button>
                 </CardContent>
               </Card>
