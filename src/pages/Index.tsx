@@ -303,7 +303,7 @@ const Index = () => {
 
             <div className="flex items-center gap-6">
               <a 
-                href="https://nostr.blue" 
+                href={NOSTR_PROFILE_URL} 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="text-muted-foreground hover:text-sovereign transition-colors"
