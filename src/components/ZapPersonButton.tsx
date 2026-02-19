@@ -39,7 +39,7 @@ export function ZapPersonButton({ lightningAddress, className }: ZapPersonButton
       <DialogTrigger asChild>
         <Button className={className}>
           <Zap className="w-5 h-5 mr-2" />
-          Zap Me Sats
+          Support via Lightning
         </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-md">
@@ -49,7 +49,7 @@ export function ZapPersonButton({ lightningAddress, className }: ZapPersonButton
             Send a Zap
           </DialogTitle>
           <DialogDescription>
-            Support me by sending sats over the Lightning Network
+            Send a payment over the Lightning Network
           </DialogDescription>
         </DialogHeader>
         <div className="space-y-4 py-4">

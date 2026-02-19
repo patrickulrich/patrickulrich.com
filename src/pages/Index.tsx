@@ -14,13 +14,13 @@ const LIGHTNING_ADDRESS = 'patrick@sats.love';
 const Index = () => {
   useSeoMeta({
     title: 'Patrick Ulrich | Bitcoin & Digital Sovereignty',
-    description: 'Personal space of Patrick Ulrich - Bitcoin enthusiast, vibe coder, and advocate for digital sovereignty.',
+    description: 'Personal website of Patrick Ulrich - Bitcoin advocate, developer, and proponent of digital sovereignty and decentralized technologies.',
     ogTitle: 'Patrick Ulrich | Bitcoin & Digital Sovereignty',
-    ogDescription: 'Personal space of Patrick Ulrich - Bitcoin enthusiast, vibe coder, and advocate for digital sovereignty.',
+    ogDescription: 'Personal website of Patrick Ulrich - Bitcoin advocate, developer, and proponent of digital sovereignty and decentralized technologies.',
     ogImage: BANNER_URL,
     twitterCard: 'summary_large_image',
     twitterTitle: 'Patrick Ulrich | Bitcoin & Digital Sovereignty',
-    twitterDescription: 'Personal space of Patrick Ulrich - Bitcoin enthusiast, vibe coder, and advocate for digital sovereignty.',
+    twitterDescription: 'Personal website of Patrick Ulrich - Bitcoin advocate, developer, and proponent of digital sovereignty and decentralized technologies.',
     twitterImage: BANNER_URL,
   });
 
@@ -79,18 +79,18 @@ const Index = () => {
           </div>
 
           {/* Name */}
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold mb-4 tracking-tight">
+          <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold mb-6 tracking-tight">
             <span className="text-gradient-hero">Patrick Ulrich</span>
           </h1>
 
           {/* Tagline */}
-          <p className="text-xl md:text-2xl lg:text-3xl text-muted-foreground mb-8 max-w-2xl mx-auto font-light">
-            <span className="text-bitcoin">@hodlbod's</span> #1 Vibe Coder
+          <p className="text-xl md:text-2xl lg:text-3xl text-foreground font-medium mb-4 max-w-2xl mx-auto">
+            Bitcoin Advocate & Digital Sovereignty
           </p>
 
           {/* Subtitle */}
-          <p className="text-lg md:text-xl text-muted-foreground/80 mb-12 max-w-xl mx-auto">
-            Bitcoin & Digital Sovereignty
+          <p className="text-lg md:text-xl text-muted-foreground mb-12 max-w-xl mx-auto">
+            Building tools for a decentralized future
           </p>
 
           {/* CTA Buttons */}
@@ -134,7 +134,7 @@ const Index = () => {
                   <span className="text-foreground">Future of Freedom</span>
                 </h2>
                 <p className="text-lg text-muted-foreground leading-relaxed">
-                  I'm passionate about Bitcoin, Nostr, and the decentralized future. As a vibe coder, 
+                  I'm passionate about Bitcoin, Nostr, and the decentralized future. 
                   I believe in building tools that empower individuals and preserve digital sovereignty.
                 </p>
                 <p className="text-lg text-muted-foreground leading-relaxed">
@@ -152,25 +152,25 @@ const Index = () => {
                       <StatCard 
                         icon="₿" 
                         label="Bitcoin" 
-                        value="Maxi"
+                        value="Advocate"
                         className="text-bitcoin"
                       />
                       <StatCard 
                         icon="⚡" 
                         label="Lightning" 
-                        value="Native"
+                        value="Developer"
                         className="text-gold"
                       />
                       <StatCard 
                         icon="🔮" 
                         label="Nostr" 
-                        value="Active"
+                        value="Contributor"
                         className="text-sovereign"
                       />
                       <StatCard 
                         icon="💻" 
-                        label="Vibe Coding" 
-                        value="Daily"
+                        label="Open Source" 
+                        value="Creator"
                         className="text-bitcoin"
                       />
                     </div>
@@ -188,11 +188,11 @@ const Index = () => {
           <div className="max-w-4xl mx-auto">
             <div className="text-center mb-16">
               <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
-                <span className="text-foreground">Find Me </span>
-                <span className="text-gradient-bitcoin">On Nostr</span>
+                <span className="text-foreground">Connect </span>
+                <span className="text-gradient-bitcoin">With Me</span>
               </h2>
               <p className="text-lg text-muted-foreground max-w-xl mx-auto">
-                Connect with me on the decentralized social network built on freedom and censorship resistance.
+                Reach out on Nostr, the decentralized social network built on principles of freedom and censorship resistance.
               </p>
             </div>
 
@@ -233,7 +233,7 @@ const Index = () => {
                     </div>
                     <div>
                       <h3 className="font-semibold text-lg">Lightning Address</h3>
-                      <p className="text-sm text-muted-foreground">Zap me sats!</p>
+                      <p className="text-sm text-muted-foreground">Send sats via Lightning</p>
                     </div>
                   </div>
                   <div className="bg-muted/50 rounded-lg p-3 mb-4 overflow-x-auto">
@@ -299,12 +299,8 @@ const Index = () => {
                 rel="noopener noreferrer"
                 className="text-muted-foreground hover:text-bitcoin transition-colors text-sm"
               >
-                Vibed with Shakespeare
+                Built with Shakespeare
               </a>
-              <span className="text-muted-foreground/50">|</span>
-              <span className="text-muted-foreground text-sm">
-                Built with Bitcoin energy ⚡
-              </span>
             </div>
           </div>
         </div>
