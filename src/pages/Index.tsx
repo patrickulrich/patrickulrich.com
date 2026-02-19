@@ -164,9 +164,9 @@ const Index = () => {
                         className="text-gold"
                       />
                       <StatCard 
-                        icon="🔮" 
+                        icon="🌐" 
                         label="Nostr" 
-                        value="Contributor"
+                        value="Builder"
                         className="text-sovereign"
                       />
                       <StatCard 
