@@ -16,6 +16,9 @@ import { Separator } from '@/components/ui/separator';
 import { useToast } from '@/hooks/useToast';
 import QRCode from 'qrcode';
 
+// CORS proxy for fetching LNURL endpoints
+const CORS_PROXY = 'https://proxy.shakespeare.diy/?url=';
+
 interface ZapPersonButtonProps {
   lightningAddress: string;
   className?: string;
@@ -96,9 +99,9 @@ export function ZapPersonButton({ lightningAddress, className }: ZapPersonButton
         throw new Error('Invalid lightning address format');
       }
 
-      // Step 1: Fetch LNURL-pay metadata
+      // Step 1: Fetch LNURL-pay metadata (via CORS proxy)
       const lnurlPayUrl = `https://${domain}/.well-known/lnurlp/${username}`;
-      const payResponse = await fetch(lnurlPayUrl);
+      const payResponse = await fetch(CORS_PROXY + encodeURIComponent(lnurlPayUrl));
       
       if (!payResponse.ok) {
         throw new Error('Failed to fetch LNURL-pay endpoint');
@@ -110,10 +113,10 @@ export function ZapPersonButton({ lightningAddress, className }: ZapPersonButton
         throw new Error(payData.reason || 'LNURL-pay endpoint error');
       }
 
-      // Step 2: Fetch invoice from callback URL
+      // Step 2: Fetch invoice from callback URL (via CORS proxy)
       const millisats = satAmount * 1000;
       const callbackUrl = `${payData.callback}?amount=${millisats}`;
-      const invoiceResponse = await fetch(callbackUrl);
+      const invoiceResponse = await fetch(CORS_PROXY + encodeURIComponent(callbackUrl));
 
       if (!invoiceResponse.ok) {
         throw new Error('Failed to fetch invoice');
