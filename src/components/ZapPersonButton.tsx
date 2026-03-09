@@ -223,12 +223,15 @@ export function ZapPersonButton({ lightningAddress, className }: ZapPersonButton
 
             {/* QR Code */}
             <div className="flex justify-center">
-              <Card className="p-3">
+              <Card 
+                className="p-3 cursor-pointer hover:ring-2 hover:ring-bitcoin/50 transition-all"
+                onClick={openInWallet}
+              >
                 <CardContent className="p-0 flex justify-center">
                   {qrCodeUrl ? (
                     <img
                       src={qrCodeUrl}
-                      alt="Lightning Invoice QR Code"
+                      alt="Click to open in Lightning wallet"
                       className="w-64 h-64 object-contain"
                     />
                   ) : (
@@ -237,6 +240,7 @@ export function ZapPersonButton({ lightningAddress, className }: ZapPersonButton
                 </CardContent>
               </Card>
             </div>
+            <p className="text-xs text-center text-muted-foreground">Click QR code to open in wallet</p>
 
             {/* Invoice input with copy */}
             <div className="space-y-2">
