@@ -115,14 +115,27 @@ export function ZapPersonButton({ lightningAddress, className }: ZapPersonButton
 
       // Step 2: Fetch invoice from callback URL (via CORS proxy)
       const millisats = satAmount * 1000;
-      const callbackUrl = `${payData.callback}?amount=${millisats}`;
+      // Use & if callback URL already has query parameters, otherwise use ?
+      const separator = payData.callback.includes('?') ? '&' : '?';
+      const callbackUrl = `${payData.callback}${separator}amount=${millisats}`;
+      
       const invoiceResponse = await fetch(CORS_PROXY + encodeURIComponent(callbackUrl));
 
       if (!invoiceResponse.ok) {
-        throw new Error('Failed to fetch invoice');
+        const responseText = await invoiceResponse.text().catch(() => 'Unable to read response');
+        console.error('Invoice fetch failed:', invoiceResponse.status, responseText);
+        throw new Error(`Failed to fetch invoice (${invoiceResponse.status})`);
       }
 
-      const invoiceData = await invoiceResponse.json();
+      const responseText = await invoiceResponse.text();
+      
+      let invoiceData;
+      try {
+        invoiceData = JSON.parse(responseText);
+      } catch {
+        console.error('Failed to parse invoice response as JSON');
+        throw new Error('Invalid response from invoice endpoint');
+      }
 
       if (invoiceData.status === 'ERROR') {
         throw new Error(invoiceData.reason || 'Invoice generation error');
