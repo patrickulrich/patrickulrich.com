@@ -1,6 +1,115 @@
+import { useSeoMeta } from '@unhead/react';
 import { nip19 } from 'nostr-tools';
-import { useParams } from 'react-router-dom';
+import { useQuery } from '@tanstack/react-query';
+import { useParams, Link } from 'react-router-dom';
+import { marked } from 'marked';
+import { fetchArticle } from '@/hooks/useArticles';
 import NotFound from './NotFound';
+
+interface NAddrData {
+  kind: number;
+  pubkey: string;
+  identifier: string;
+  relays?: string[];
+}
+
+function ArticleView({ data }: { data: NAddrData }) {
+  const { nip19: naddr } = useParams<{ nip19: string }>();
+
+  const { data: event, isLoading } = useQuery({
+    queryKey: ['nostr', 'article', data.pubkey, data.identifier],
+    queryFn: () => fetchArticle(data.pubkey, data.identifier, data.kind),
+    staleTime: 5 * 60 * 1000,
+  });
+
+  const title = event?.tags.find(([name]) => name === 'title')?.[1] || 'Untitled';
+  const summary = event?.tags.find(([name]) => name === 'summary')?.[1];
+  const image = event?.tags.find(([name]) => name === 'image')?.[1];
+  const publishedAt = event?.tags.find(([name]) => name === 'published_at')?.[1];
+  const timestamp = publishedAt ? parseInt(publishedAt, 10) : event?.created_at;
+
+  useSeoMeta({
+    title: event ? `${title} | Patrick Ulrich` : 'Article | Patrick Ulrich',
+    description: summary || 'Long-form article by Patrick Ulrich',
+    ogTitle: title,
+    ogDescription: summary,
+    ogImage: image,
+  });
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-background">
+        <div className="container mx-auto px-4 py-24 max-w-3xl">
+          <div className="h-12 bg-muted rounded animate-pulse mb-6 w-3/4" />
+          <div className="h-4 bg-muted rounded animate-pulse mb-2 w-1/4" />
+          <div className="h-96 bg-muted rounded animate-pulse mt-8" />
+        </div>
+      </div>
+    );
+  }
+
+  if (!event) {
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <div className="text-center">
+          <h1 className="text-2xl font-bold mb-4">Article not found</h1>
+          <p className="text-muted-foreground mb-6">This article may have been deleted or is not available on the configured relays.</p>
+          <Link to="/blog" className="text-bitcoin hover:underline">← Back to Blog</Link>
+        </div>
+      </div>
+    );
+  }
+
+  const html = marked.parse(event.content, { async: false }) as string;
+
+  return (
+    <div className="min-h-screen bg-background">
+      <article className="container mx-auto px-4 py-24 max-w-3xl">
+        <Link to="/blog" className="text-sm text-muted-foreground hover:text-bitcoin transition-colors mb-8 inline-block">
+          ← Back to Blog
+        </Link>
+
+        {image && (
+          <img src={image} alt={title} className="w-full h-64 md:h-96 object-cover rounded-xl mb-8" />
+        )}
+
+        <h1 className="text-3xl md:text-5xl font-bold mb-4 tracking-tight">{title}</h1>
+
+        {timestamp && (
+          <p className="text-muted-foreground mb-8">
+            {new Date(timestamp * 1000).toLocaleDateString('en-US', {
+              year: 'numeric',
+              month: 'long',
+              day: 'numeric',
+            })}
+          </p>
+        )}
+
+        {summary && (
+          <p className="text-lg text-muted-foreground mb-8 italic border-l-4 border-bitcoin/30 pl-4">
+            {summary}
+          </p>
+        )}
+
+        <div
+          className="prose prose-lg max-w-none dark:prose-invert"
+          dangerouslySetInnerHTML={{ __html: html }}
+        />
+
+        <div className="mt-16 pt-8 border-t text-center">
+          <a
+            href={`https://nostr.blue/${naddr}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-sm text-muted-foreground hover:text-bitcoin transition-colors"
+          >
+            View on nostr.blue →
+          </a>
+        </div>
+      </article>
+    </div>
+  );
+}
 
 export function NIP19Page() {
   const { nip19: identifier } = useParams<{ nip19: string }>();
@@ -16,27 +125,28 @@ export function NIP19Page() {
     return <NotFound />;
   }
 
-  const { type } = decoded;
+  const { type, data } = decoded;
 
   switch (type) {
     case 'npub':
     case 'nprofile':
-      // AI agent should implement profile view here
       return <div>Profile placeholder</div>;
 
     case 'note':
-      // AI agent should implement note view here
       return <div>Note placeholder</div>;
 
     case 'nevent':
-      // AI agent should implement event view here
       return <div>Event placeholder</div>;
 
-    case 'naddr':
-      // AI agent should implement addressable event view here
+    case 'naddr': {
+      const addrData = data as NAddrData;
+      if (addrData.kind === 30023) {
+        return <ArticleView data={addrData} />;
+      }
       return <div>Addressable event placeholder</div>;
+    }
 
     default:
       return <NotFound />;
   }
-} 
+}

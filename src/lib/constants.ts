@@ -1,0 +1,2 @@
+/** Patrick's Nostr hex pubkey */
+export const PATRICK_HEX_PUBKEY = '0f563fe2cfdf180cb104586b95873379a0c1fdcfbc301a80c8255f33d15f039d';
