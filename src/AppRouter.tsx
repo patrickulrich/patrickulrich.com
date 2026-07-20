@@ -3,6 +3,7 @@ import { ScrollToTop } from "./components/ScrollToTop";
 import { SiteNav } from "./components/SiteNav";
 
 import Index from "./pages/Index";
+import About from "./pages/About";
 import Blog from "./pages/Blog";
 import Photos from "./pages/Photos";
 import Contact from "./pages/Contact";
@@ -17,6 +18,7 @@ export function AppRouter() {
       <SiteNav />
       <Routes>
         <Route path="/" element={<Index />} />
+        <Route path="/about" element={<About />} />
         <Route path="/blog" element={<Blog />} />
         <Route path="/photos" element={<Photos />} />
         <Route path="/contact" element={<Contact />} />
