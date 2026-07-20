@@ -16,6 +16,7 @@ export function SiteNav() {
   const links = [
     { label: 'Home', to: '/' },
     { label: 'Blog', to: '/blog' },
+    { label: 'Photos', to: '/photos' },
   ];
 
   return (

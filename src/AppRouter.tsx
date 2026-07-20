@@ -4,6 +4,7 @@ import { SiteNav } from "./components/SiteNav";
 
 import Index from "./pages/Index";
 import Blog from "./pages/Blog";
+import Photos from "./pages/Photos";
 import Canary from "./pages/Canary";
 import { NIP19Page } from "./pages/NIP19Page";
 import NotFound from "./pages/NotFound";
@@ -16,6 +17,7 @@ export function AppRouter() {
       <Routes>
         <Route path="/" element={<Index />} />
         <Route path="/blog" element={<Blog />} />
+        <Route path="/photos" element={<Photos />} />
         <Route path="/canary.md" element={<Canary />} />
         {/* NIP-19 route for npub1, note1, naddr1, nevent1, nprofile1 */}
         <Route path="/:nip19" element={<NIP19Page />} />
