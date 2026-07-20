@@ -8,10 +8,24 @@ import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
 import { useToast } from '@/hooks/useToast';
 import { useCurrentUser } from '@/hooks/useCurrentUser';
-import { LoginArea } from '@/components/auth/LoginArea';
+import AuthDialog from '@/components/auth/AuthDialog';
+import { QuickLoginDialog } from '@/components/auth/QuickLoginDialog';
 import { PATRICK_HEX_PUBKEY } from '@/lib/constants';
 import { APP_RELAYS } from '@/lib/appRelays';
 import { Loader2, Send, Lock } from 'lucide-react';
+
+interface Nip07Provider {
+  getPublicKey(): Promise<string>;
+}
+
+function getNip07Provider(): Nip07Provider | undefined {
+  if (typeof window === 'undefined' || !('nostr' in window)) return undefined;
+  const provider = (window as { nostr?: unknown }).nostr;
+  if (provider && typeof (provider as Nip07Provider).getPublicKey === 'function') {
+    return provider as Nip07Provider;
+  }
+  return undefined;
+}
 
 interface WindowNostr {
   nip44?: {
@@ -36,6 +50,24 @@ const Contact = () => {
   const { toast } = useToast();
   const [message, setMessage] = useState('');
   const [sending, setSending] = useState(false);
+  const [authDialogOpen, setAuthDialogOpen] = useState(false);
+  const [quickLoginPubkey, setQuickLoginPubkey] = useState<string | null>(null);
+
+  const handleSignIn = async () => {
+    const provider = getNip07Provider();
+    if (provider) {
+      try {
+        const pubkey = await provider.getPublicKey();
+        if (pubkey) {
+          setQuickLoginPubkey(pubkey);
+          return;
+        }
+      } catch {
+        // Extension declined or errored — fall through to the full dialog.
+      }
+    }
+    setAuthDialogOpen(true);
+  };
 
   const canEncrypt = !!(user && getWindowNostr()?.nip44);
 
@@ -168,11 +200,38 @@ const Contact = () => {
           <Card className="rounded-lg py-0! gap-0! mb-8">
             <CardContent className="p-8 text-center">
               <Lock className="size-12 text-muted-foreground mx-auto mb-4" />
-              <h2 className="text-xl font-bold mb-2">Login Required</h2>
+              <h2 className="text-xl font-bold mb-2">Sign In Required</h2>
               <p className="text-muted-foreground mb-6">
-                To send an encrypted message, you need to log in with a Nostr extension (like Alby, nos2x, or similar).
+                To send an encrypted message, sign in with your Nostr account or create a new one.
               </p>
-              <LoginArea />
+              <div className="flex flex-wrap gap-3 justify-center">
+                <Button
+                  onClick={() => setAuthDialogOpen(true)}
+                  className="gradient-bitcoin text-white"
+                >
+                  Register
+                </Button>
+                <Button
+                  onClick={handleSignIn}
+                  variant="outline"
+                >
+                  Sign In
+                </Button>
+              </div>
+
+              <QuickLoginDialog
+                isOpen={quickLoginPubkey !== null}
+                pubkey={quickLoginPubkey ?? ''}
+                onClose={() => setQuickLoginPubkey(null)}
+                onOtherLogin={() => {
+                  setQuickLoginPubkey(null);
+                  setAuthDialogOpen(true);
+                }}
+              />
+              <AuthDialog
+                isOpen={authDialogOpen}
+                onClose={() => setAuthDialogOpen(false)}
+              />
             </CardContent>
           </Card>
         )}
@@ -240,11 +299,6 @@ const Contact = () => {
             <Button asChild variant="outline">
               <a href="https://signal.me/#eu/VNpJ0WvIp1vsQH5sXjatFf_wPZCFvXwG7t6n__lp1rASP8QY2apMcbtZVKDZtBtS" target="_blank" rel="noopener noreferrer">
                 Signal
-              </a>
-            </Button>
-            <Button asChild variant="outline">
-              <a href="https://nostr.blue/npub1patrlck0muvqevgytp4etpen0xsvrlw0hscp4qxgy40n852lqwwsz79h9a" target="_blank" rel="noopener noreferrer">
-                Nostr
               </a>
             </Button>
           </div>
