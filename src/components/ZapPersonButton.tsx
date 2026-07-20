@@ -33,9 +33,10 @@ export function ZapPersonButton({ lightningAddress, className }: ZapPersonButton
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
 
-  // Reset state when dialog opens/closes
+  // Reset state when dialog closes
   useEffect(() => {
     if (!isOpen) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- clearing stale invoice/QR state on close is intentional and safe
       setInvoice(null);
       setQrCodeUrl('');
       setAmount('1000');

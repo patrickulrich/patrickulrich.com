@@ -1,7 +1,9 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { ScrollToTop } from "./components/ScrollToTop";
+import { SiteNav } from "./components/SiteNav";
 
 import Index from "./pages/Index";
+import Blog from "./pages/Blog";
 import Canary from "./pages/Canary";
 import { NIP19Page } from "./pages/NIP19Page";
 import NotFound from "./pages/NotFound";
@@ -10,8 +12,10 @@ export function AppRouter() {
   return (
     <BrowserRouter>
       <ScrollToTop />
+      <SiteNav />
       <Routes>
         <Route path="/" element={<Index />} />
+        <Route path="/blog" element={<Blog />} />
         <Route path="/canary.md" element={<Canary />} />
         {/* NIP-19 route for npub1, note1, naddr1, nevent1, nprofile1 */}
         <Route path="/:nip19" element={<NIP19Page />} />

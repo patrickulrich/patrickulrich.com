@@ -6,12 +6,11 @@ import { Card, CardContent } from '@/components/ui/card';
 import { ZapPersonButton } from '@/components/ZapPersonButton';
 import { cn } from '@/lib/utils';
 
-const PATRICK_HEX_PUBKEY = '0f563fe2cfdf180cb104586b95873379a0c1fdcfbc301a80c8255f33d15f039d';
-const NOSTR_PROFILE_URL = `https://nostr.blue/profile/${PATRICK_HEX_PUBKEY}`;
+const NOSTR_PROFILE_URL = 'https://nostr.blue/npub1patrlck0muvqevgytp4etpen0xsvrlw0hscp4qxgy40n852lqwwsz79h9a';
 const AVATAR_URL = 'https://relay.patrickulrich.com/8376dba8728c2672acc10b7a5fce3f7cbde9299a4c0151b34b6a431d48715652.png';
 const BANNER_URL = 'https://m.primal.net/HhVD.jpg';
 const LIGHTNING_ADDRESS = 'patrick@sats.love';
-const UNDISCOVERED_WEB_URL = 'https://undiscoveredweb.com/';
+const GOOD_MORNING_BITCOIN_URL = 'https://goodmorningbitcoin.com/';
 
 const Index = () => {
   useSeoMeta({
@@ -97,13 +96,13 @@ const Index = () => {
           <div className="flex flex-wrap gap-4 justify-center">
             <ZapPersonButton 
               lightningAddress={LIGHTNING_ADDRESS}
-              className="gradient-bitcoin text-white font-semibold px-8 py-6 text-lg rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
+              className="gradient-bitcoin text-white font-semibold px-8! h-12! text-lg rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
             />
             <Button 
               asChild
               variant="outline" 
               size="lg"
-              className="px-8 py-6 text-lg rounded-full border-2 hover:border-bitcoin hover:text-bitcoin transition-all duration-300"
+              className="px-8! h-12! text-lg rounded-full border-2 hover:border-sovereign hover:text-sovereign transition-all duration-300 bg-transparent!"
             >
               <a href={NOSTR_PROFILE_URL} target="_blank" rel="noopener noreferrer">
                 <svg className="w-5 h-5 mr-2" viewBox="0 0 24 24" fill="currentColor">
@@ -148,7 +147,7 @@ const Index = () => {
 
               {/* Visual Element */}
               <div className="relative">
-                <Card className="bg-card/50 backdrop-blur-gradient border-bitcoin/20 overflow-hidden">
+                <Card className="bg-card/50 backdrop-blur-gradient border-bitcoin/20 overflow-hidden rounded-lg py-0! gap-0!">
                   <CardContent className="p-8">
                     <div className="grid grid-cols-2 gap-6">
                       <StatCard 
@@ -200,7 +199,7 @@ const Index = () => {
 
             <div className="grid gap-6 md:grid-cols-2">
               {/* Nostr Profile Card */}
-              <Card className="group hover:border-sovereign/50 transition-all duration-300 overflow-hidden">
+              <Card className="group hover:border-sovereign/50 transition-all duration-300 overflow-hidden rounded-lg py-0! gap-0!">
                 <CardContent className="p-6">
                   <div className="flex items-center gap-4 mb-6">
                     <a href={NOSTR_PROFILE_URL} target="_blank" rel="noopener noreferrer" className="w-14 h-14 rounded-full bg-sovereign flex items-center justify-center text-white text-2xl hover:opacity-90 transition-opacity">
@@ -227,29 +226,29 @@ const Index = () => {
                 </CardContent>
               </Card>
 
-              {/* Undiscovered Web Card */}
-              <Card className="group hover:border-foreground/30 dark:hover:border-foreground/50 transition-all duration-300 overflow-hidden">
+              {/* Good Morning Bitcoin Card */}
+              <Card className="group hover:border-bitcoin/50 transition-all duration-300 overflow-hidden rounded-lg py-0! gap-0!">
                 <CardContent className="p-6">
                   <div className="flex items-center gap-4 mb-6">
-                    <a href={UNDISCOVERED_WEB_URL} target="_blank" rel="noopener noreferrer" className="w-14 h-14 rounded-full bg-foreground flex items-center justify-center text-background text-2xl hover:opacity-90 transition-opacity">
-                      🔮
+                    <a href={GOOD_MORNING_BITCOIN_URL} target="_blank" rel="noopener noreferrer" className="w-14 h-14 rounded-full bg-bitcoin flex items-center justify-center text-white text-2xl hover:opacity-90 transition-opacity">
+                      📻
                     </a>
                     <div>
-                      <a href={UNDISCOVERED_WEB_URL} target="_blank" rel="noopener noreferrer" className="font-semibold text-xl hover:text-foreground/80 transition-colors">
-                        Undiscovered Web
+                      <a href={GOOD_MORNING_BITCOIN_URL} target="_blank" rel="noopener noreferrer" className="font-semibold text-xl hover:text-bitcoin transition-colors">
+                        Good Morning Bitcoin
                       </a>
-                      <p className="text-sm text-muted-foreground">Explore the decentralized web</p>
+                      <p className="text-sm text-muted-foreground">24/7 Bitcoin Radio Station</p>
                     </div>
                   </div>
                   <p className="text-muted-foreground mb-6">
-                    Discover the future of the internet. Learn about decentralized technologies, sovereign identity, and digital freedom.
+                    The #1 24/7 Bitcoin radio station. Streaming podcasts, news, and pure Bitcoin signal — no ads, all the time.
                   </p>
                   <Button 
                     asChild
-                    className="w-full bg-foreground hover:bg-foreground/90 text-background"
+                    className="w-full bg-bitcoin hover:bg-bitcoin/90 text-white"
                   >
-                    <a href={UNDISCOVERED_WEB_URL} target="_blank" rel="noopener noreferrer">
-                      Learn More
+                    <a href={GOOD_MORNING_BITCOIN_URL} target="_blank" rel="noopener noreferrer">
+                      Start Listening
                     </a>
                   </Button>
                 </CardContent>
@@ -268,7 +267,7 @@ const Index = () => {
               <span className="text-gradient-bitcoin">Sovereignty</span>
             </h2>
             
-            <blockquote className="text-xl md:text-2xl lg:text-3xl text-muted-foreground italic leading-relaxed mb-8">
+            <blockquote className="text-xl md:text-2xl lg:text-3xl text-muted-foreground italic mb-8">
               "The ability to control your own data, your own identity, and your own financial destiny 
               is the foundation of true freedom in the digital age."
             </blockquote>
