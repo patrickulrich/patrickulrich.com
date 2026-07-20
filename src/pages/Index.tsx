@@ -11,6 +11,7 @@ const AVATAR_URL = 'https://relay.patrickulrich.com/8376dba8728c2672acc10b7a5fce
 const BANNER_URL = 'https://m.primal.net/HhVD.jpg';
 const LIGHTNING_ADDRESS = 'patrick@sats.love';
 const GOOD_MORNING_BITCOIN_URL = 'https://goodmorningbitcoin.com/';
+const LEXINGTON_BITCOIN_URL = 'https://lexingtonbitcoin.org/';
 
 const Index = () => {
   useSeoMeta({
@@ -193,14 +194,14 @@ const Index = () => {
                 <span className="text-gradient-bitcoin">More</span>
               </h2>
               <p className="text-lg text-muted-foreground max-w-xl mx-auto">
-                Connect and discover more about the decentralized ecosystem.
+                Projects and communities I'm building and contributing to.
               </p>
             </div>
 
-            <div className="grid gap-6 md:grid-cols-2">
+            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
               {/* Nostr Profile Card */}
-              <Card className="group hover:border-sovereign/50 transition-all duration-300 overflow-hidden rounded-lg py-0! gap-0!">
-                <CardContent className="p-6">
+              <Card className="group hover:border-sovereign/50 transition-all duration-300 overflow-hidden rounded-lg py-0! gap-0! flex flex-col">
+                <CardContent className="p-6 flex flex-col flex-1">
                   <div className="flex items-center gap-4 mb-6">
                     <a href={NOSTR_PROFILE_URL} target="_blank" rel="noopener noreferrer" className="w-14 h-14 rounded-full bg-sovereign flex items-center justify-center text-white text-2xl hover:opacity-90 transition-opacity">
                       🌐
@@ -212,23 +213,23 @@ const Index = () => {
                       <p className="text-sm text-muted-foreground">Follow me on Nostr</p>
                     </div>
                   </div>
-                  <p className="text-muted-foreground mb-6">
-                    Connect with me on the decentralized social network. View my posts, interactions, and more on nostr.blue.
+                  <p className="text-muted-foreground mb-6 flex-1">
+                    Connect with me on the decentralized social network. View my posts, interactions, and latest activity on nostr.blue.
                   </p>
                   <Button 
                     asChild
                     className="w-full bg-sovereign hover:bg-sovereign/90 text-white"
                   >
                     <a href={NOSTR_PROFILE_URL} target="_blank" rel="noopener noreferrer">
-                      View Profile on nostr.blue
+                      View Profile
                     </a>
                   </Button>
                 </CardContent>
               </Card>
 
               {/* Good Morning Bitcoin Card */}
-              <Card className="group hover:border-bitcoin/50 transition-all duration-300 overflow-hidden rounded-lg py-0! gap-0!">
-                <CardContent className="p-6">
+              <Card className="group hover:border-bitcoin/50 transition-all duration-300 overflow-hidden rounded-lg py-0! gap-0! flex flex-col">
+                <CardContent className="p-6 flex flex-col flex-1">
                   <div className="flex items-center gap-4 mb-6">
                     <a href={GOOD_MORNING_BITCOIN_URL} target="_blank" rel="noopener noreferrer" className="w-14 h-14 rounded-full bg-bitcoin flex items-center justify-center text-white text-2xl hover:opacity-90 transition-opacity">
                       📻
@@ -240,7 +241,7 @@ const Index = () => {
                       <p className="text-sm text-muted-foreground">24/7 Bitcoin Radio Station</p>
                     </div>
                   </div>
-                  <p className="text-muted-foreground mb-6">
+                  <p className="text-muted-foreground mb-6 flex-1">
                     The #1 24/7 Bitcoin radio station. Streaming podcasts, news, and pure Bitcoin signal — no ads, all the time.
                   </p>
                   <Button 
@@ -249,6 +250,34 @@ const Index = () => {
                   >
                     <a href={GOOD_MORNING_BITCOIN_URL} target="_blank" rel="noopener noreferrer">
                       Start Listening
+                    </a>
+                  </Button>
+                </CardContent>
+              </Card>
+
+              {/* Lexington Bitcoin Card */}
+              <Card className="group hover:border-bitcoin/50 transition-all duration-300 overflow-hidden rounded-lg py-0! gap-0! flex flex-col">
+                <CardContent className="p-6 flex flex-col flex-1">
+                  <div className="flex items-center gap-4 mb-6">
+                    <a href={LEXINGTON_BITCOIN_URL} target="_blank" rel="noopener noreferrer" className="w-14 h-14 rounded-full bg-bitcoin flex items-center justify-center text-white text-2xl hover:opacity-90 transition-opacity">
+                      🍻
+                    </a>
+                    <div>
+                      <a href={LEXINGTON_BITCOIN_URL} target="_blank" rel="noopener noreferrer" className="font-semibold text-xl hover:text-bitcoin transition-colors">
+                        Lexington Bitcoin
+                      </a>
+                      <p className="text-sm text-muted-foreground">Weekly Bitcoin Meetup</p>
+                    </div>
+                  </div>
+                  <p className="text-muted-foreground mb-6 flex-1">
+                    One of the longest-running weekly Bitcoin meetups, connecting Bitcoiners and providing education in Central Kentucky since 2015.
+                  </p>
+                  <Button 
+                    asChild
+                    className="w-full bg-bitcoin hover:bg-bitcoin/90 text-white"
+                  >
+                    <a href={LEXINGTON_BITCOIN_URL} target="_blank" rel="noopener noreferrer">
+                      Learn More
                     </a>
                   </Button>
                 </CardContent>

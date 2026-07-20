@@ -17,6 +17,7 @@ export function SiteNav() {
     { label: 'Home', to: '/' },
     { label: 'Blog', to: '/blog' },
     { label: 'Photos', to: '/photos' },
+    { label: 'Contact', to: '/contact' },
   ];
 
   return (
