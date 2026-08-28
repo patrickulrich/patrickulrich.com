@@ -1,2 +1,4 @@
 User-agent: *
 Allow: /
+
+Sitemap: https://patrickulrich.com/sitemap.xml

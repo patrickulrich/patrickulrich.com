@@ -11,9 +11,9 @@ const LIGHTNING_ADDRESS = 'patrick@sats.love';
 const About = () => {
   useSeoMeta({
     title: 'About | Patrick Ulrich',
-    description: 'Bitcoin advocate, developer, and builder based in Lexington, Kentucky. ATMs, Lightning, meetups, radio, and freedom tech.',
+    description: 'Bitcoin advocate, educator, and builder based in Lexington, Kentucky. ATMs, Lightning, meetups, radio, and freedom tech.',
     ogTitle: 'About | Patrick Ulrich',
-    ogDescription: 'Bitcoin advocate, developer, and builder based in Lexington, Kentucky. ATMs, Lightning, meetups, radio, and freedom tech.',
+    ogDescription: 'Bitcoin advocate, educator, and builder based in Lexington, Kentucky. ATMs, Lightning, meetups, radio, and freedom tech.',
     ogImage: AVATAR_URL,
   });
 
@@ -31,7 +31,7 @@ const About = () => {
               <span className="text-gradient-hero">Patrick Ulrich</span>
             </h1>
             <p className="text-lg text-muted-foreground">
-              Bitcoin advocate, developer, and builder
+              Bitcoin advocate, educator, and builder
             </p>
             <p className="text-sm text-muted-foreground">Lexington, Kentucky</p>
           </div>
@@ -40,7 +40,7 @@ const About = () => {
         {/* Bio */}
         <div className="space-y-6 text-lg text-foreground/90">
           <p>
-            Patrick Ulrich is a Bitcoin advocate, developer, and builder based in Lexington, Kentucky. He's spent the last decade working across the Bitcoin ecosystem — from operating ATMs and mining advisory to building Lightning Network applications and organizing one of the country's longest-running weekly Bitcoin meetups.
+            Patrick Ulrich is a Bitcoin advocate, educator, and builder based in Lexington, Kentucky. He's spent the last decade working across the Bitcoin ecosystem — from operating ATMs and mining advisory to building Lightning Network applications and organizing one of the country's longest-running weekly Bitcoin meetups.
           </p>
 
           <h2 className="text-xl font-bold text-foreground pt-4">Bitcoin ATMs</h2>
@@ -48,9 +48,9 @@ const About = () => {
             His career in Bitcoin began on the ground floor. In 2014, Patrick launched Bluegrass Bitcoin, deploying the first Bitcoin ATM north of Atlanta and south of Chicago. What started with a single machine in Lexington grew to include Louisville, making it possible for people across Kentucky to buy Bitcoin in person for the first time. He spent years maintaining machines, educating first-time users face-to-face, and navigating the operational realities of running Bitcoin infrastructure in the real world.
           </p>
 
-          <h2 className="text-xl font-bold text-foreground pt-4">Consulting & Development</h2>
+          <h2 className="text-xl font-bold text-foreground pt-4">Consulting & Operations</h2>
           <p>
-            From there, Patrick moved deeper into the technical side. He served as CTO/COO of Lexington Bitcoin Consulting for seven years, helping individuals and businesses adopt self-custody, Lightning payments, and node infrastructure. He did Lightning Network development with 3Speak, contributed to mining operations and advisory, and managed conference logistics for BitBlockBoom, one of the largest Bitcoin-only conferences in the US.
+            From there, Patrick moved deeper into the technical side. He served as CTO/COO of Lexington Bitcoin Consulting for seven years, helping individuals and businesses adopt self-custody, Lightning payments, and node infrastructure. He ran Lightning Network infrastructure with 3Speak, contributed to mining operations and advisory, and managed conference logistics for BitBlockBoom, one of the largest Bitcoin-only conferences in the US.
           </p>
 
           <h2 className="text-xl font-bold text-foreground pt-4">Lexington Bitcoin Meetup</h2>
@@ -58,9 +58,9 @@ const About = () => {
             On January 20, 2015, Patrick founded the Lexington Bitcoin Meetup — a weekly gathering that has been meeting consistently for over a decade, making it one of the longest-running Bitcoin meetups in the country. What started as a handful of people in a room has grown into a permanent community hub for Bitcoiners across Central Kentucky, focused on education, connection, and building local circular economies.
           </p>
 
-          <h2 className="text-xl font-bold text-foreground pt-4">Today</h2>
+          <h2 className="text-xl font-bold text-foreground pt-4">Building the Stack</h2>
           <p>
-            Today, Patrick runs <a href={GOOD_MORNING_BITCOIN_URL} target="_blank" rel="noopener noreferrer" className="text-bitcoin font-medium hover:underline">Good Morning Bitcoin</a>, a 24/7 Bitcoin radio station streaming podcasts, news, and education with zero ads. He also develops <a href="https://nostr.blue" target="_blank" rel="noopener noreferrer" className="text-sovereign font-medium hover:underline">nostr.blue</a>, one of the most complete Nostr clients available. He's focused on building tools that remove middlemen and restore individual sovereignty, and on demonstrating the Nostr and Lightning stack by building on it.
+            Today, Patrick runs <a href={GOOD_MORNING_BITCOIN_URL} target="_blank" rel="noopener noreferrer" className="text-bitcoin font-medium hover:underline">Good Morning Bitcoin</a>, a 24/7 Bitcoin radio station streaming podcasts, news, and education with zero ads. He also builds and runs <a href="https://nostr.blue" target="_blank" rel="noopener noreferrer" className="text-sovereign font-medium hover:underline">nostr.blue</a>, one of the most complete Nostr clients available. He's focused on building tools that remove middlemen and restore individual sovereignty, and on demonstrating the Nostr and Lightning stack by building on it.
           </p>
         </div>
 

@@ -17,22 +17,29 @@ const LEXINGTON_BITCOIN_URL = 'https://lexingtonbitcoin.org/';
 const Index = () => {
   useSeoMeta({
     title: 'Patrick Ulrich | Bitcoin & Digital Sovereignty',
-    description: 'Personal website of Patrick Ulrich - Bitcoin advocate, developer, and proponent of digital sovereignty and decentralized technologies.',
+    description: 'Personal website of Patrick Ulrich - Bitcoin advocate, educator, and proponent of digital sovereignty and decentralized technologies.',
     ogTitle: 'Patrick Ulrich | Bitcoin & Digital Sovereignty',
-    ogDescription: 'Personal website of Patrick Ulrich - Bitcoin advocate, developer, and proponent of digital sovereignty and decentralized technologies.',
+    ogDescription: 'Personal website of Patrick Ulrich - Bitcoin advocate, educator, and proponent of digital sovereignty and decentralized technologies.',
     ogImage: BANNER_URL,
     twitterCard: 'summary_large_image',
     twitterTitle: 'Patrick Ulrich | Bitcoin & Digital Sovereignty',
-    twitterDescription: 'Personal website of Patrick Ulrich - Bitcoin advocate, developer, and proponent of digital sovereignty and decentralized technologies.',
+    twitterDescription: 'Personal website of Patrick Ulrich - Bitcoin advocate, educator, and proponent of digital sovereignty and decentralized technologies.',
     twitterImage: BANNER_URL,
   });
 
   const [scrollY, setScrollY] = useState(0);
 
   useEffect(() => {
-    const handleScroll = () => setScrollY(window.scrollY);
+    let raf = 0;
+    const handleScroll = () => {
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(() => setScrollY(window.scrollY));
+    };
     window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
+    return () => {
+      cancelAnimationFrame(raf);
+      window.removeEventListener('scroll', handleScroll);
+    };
   }, []);
 
   return (
@@ -107,7 +114,7 @@ const Index = () => {
               className="px-8! h-12! text-lg rounded-full border-2 hover:border-sovereign hover:text-sovereign transition-all duration-300 bg-transparent!"
             >
               <a href={NOSTR_PROFILE_URL} target="_blank" rel="noopener noreferrer">
-                <svg className="w-5 h-5 mr-2" viewBox="0 0 24 24" fill="currentColor">
+                <svg className="w-5 h-5 mr-2" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                   <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/>
                 </svg>
                 View on Nostr
@@ -117,7 +124,7 @@ const Index = () => {
 
           {/* Scroll indicator */}
           <div className="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce">
-            <svg className="w-6 h-6 text-muted-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-6 h-6 text-muted-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
             </svg>
           </div>
@@ -153,15 +160,15 @@ const Index = () => {
                   <CardContent className="p-8">
                     <div className="grid grid-cols-2 gap-6">
                       <StatCard 
-                        icon="₿" 
-                        label="Bitcoin" 
-                        value="Advocate"
+                        icon="₿"
+                        label="Bitcoin"
+                        value="Pleb"
                         className="text-bitcoin"
                       />
                       <StatCard 
-                        icon="⚡" 
-                        label="Lightning" 
-                        value="Developer"
+                        icon="⚡"
+                        label="Lightning"
+                        value="Advocate"
                         className="text-gold"
                       />
                       <StatCard 
@@ -327,9 +334,10 @@ const Index = () => {
 
             <div className="flex items-center gap-6">
               <a 
-                href="mailto:ulrich.patrickr@gmail.com" 
+                href="mailto:ulrich.patrickr@gmail.com"
                 className="text-muted-foreground hover:text-foreground transition-colors"
                 title="Email"
+                aria-label="Email"
               >
                 <svg 
                   viewBox="0 0 24 24" 
@@ -348,6 +356,7 @@ const Index = () => {
                 rel="noopener noreferrer"
                 className="text-muted-foreground hover:text-foreground transition-colors"
                 title="Signal"
+                aria-label="Signal"
               >
                 <svg viewBox="0 0 24 24" className="w-6 h-6" fill="currentColor">
                   <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H6l-2 2V4h16v12z"/>
@@ -359,6 +368,7 @@ const Index = () => {
                 rel="noopener noreferrer"
                 className="text-muted-foreground hover:text-foreground transition-colors"
                 title="GitHub"
+                aria-label="GitHub"
               >
                 <svg 
                   viewBox="0 0 24 24" 
@@ -374,6 +384,7 @@ const Index = () => {
                 rel="noopener noreferrer"
                 className="text-muted-foreground hover:text-sovereign transition-colors"
                 title="nostr.blue"
+                aria-label="nostr.blue"
               >
                 <svg 
                   viewBox="0 0 24 24" 
