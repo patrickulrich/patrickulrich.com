@@ -14,10 +14,20 @@ import { Label } from '@/components/ui/label';
 import { Card, CardContent } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
 import { useToast } from '@/hooks/useToast';
+import { assertInvoiceAmount, invoiceCommitsTo } from '@/lib/bolt11';
+import { resolveLnurlPay } from '@/lib/lnurlPay';
 import QRCode from 'qrcode';
 
 // CORS proxy for fetching LNURL endpoints
 const CORS_PROXY = 'https://proxy.shakespeare.diy/?url=';
+
+// Route LNURL requests through the CORS proxy. Validation in resolveLnurlPay
+// still sees the real HTTPS URL; only the transport is proxied.
+const proxiedFetch: typeof fetch = (input) => {
+  const url =
+    typeof input === 'string' ? input : input instanceof Request ? input.url : input.href;
+  return fetch(CORS_PROXY + encodeURIComponent(url));
+};
 
 interface ZapPersonButtonProps {
   lightningAddress: string;
@@ -94,33 +104,22 @@ export function ZapPersonButton({ lightningAddress, className }: ZapPersonButton
     setIsLoading(true);
 
     try {
-      // Parse the lightning address (user@domain.com format)
-      const [username, domain] = lightningAddress.split('@');
-      if (!username || !domain) {
-        throw new Error('Invalid lightning address format');
-      }
-
-      // Step 1: Fetch LNURL-pay metadata (via CORS proxy)
-      const lnurlPayUrl = `https://${domain}/.well-known/lnurlp/${username}`;
-      const payResponse = await fetch(CORS_PROXY + encodeURIComponent(lnurlPayUrl));
-      
-      if (!payResponse.ok) {
-        throw new Error('Failed to fetch LNURL-pay endpoint');
-      }
-
-      const payData = await payResponse.json();
-      
-      if (payData.status === 'ERROR') {
-        throw new Error(payData.reason || 'LNURL-pay endpoint error');
-      }
-
-      // Step 2: Fetch invoice from callback URL (via CORS proxy)
       const millisats = satAmount * 1000;
-      // Use & if callback URL already has query parameters, otherwise use ?
-      const separator = payData.callback.includes('?') ? '&' : '?';
-      const callbackUrl = `${payData.callback}${separator}amount=${millisats}`;
-      
-      const invoiceResponse = await fetch(CORS_PROXY + encodeURIComponent(callbackUrl));
+
+      // Step 1: Resolve and validate LNURL-pay params (via CORS proxy)
+      const params = await resolveLnurlPay({ lud16: lightningAddress }, undefined, proxiedFetch);
+
+      if (millisats < params.minSendable || millisats > params.maxSendable) {
+        throw new Error(
+          `Amount must be between ${Math.ceil(params.minSendable / 1000).toLocaleString()} and ${Math.floor(params.maxSendable / 1000).toLocaleString()} sats`,
+        );
+      }
+
+      // Step 2: Fetch invoice from the validated callback (via CORS proxy)
+      const callback = new URL(params.callback);
+      callback.searchParams.set('amount', String(millisats));
+
+      const invoiceResponse = await proxiedFetch(callback.toString());
 
       if (!invoiceResponse.ok) {
         const responseText = await invoiceResponse.text().catch(() => 'Unable to read response');
@@ -129,7 +128,7 @@ export function ZapPersonButton({ lightningAddress, className }: ZapPersonButton
       }
 
       const responseText = await invoiceResponse.text();
-      
+
       let invoiceData;
       try {
         invoiceData = JSON.parse(responseText);
@@ -142,11 +141,19 @@ export function ZapPersonButton({ lightningAddress, className }: ZapPersonButton
         throw new Error(invoiceData.reason || 'Invoice generation error');
       }
 
-      if (invoiceData.pr) {
-        setInvoice(invoiceData.pr);
-      } else {
+      if (typeof invoiceData.pr !== 'string' || !invoiceData.pr) {
         throw new Error('No invoice returned');
       }
+
+      // Step 3: The invoice is chosen by the recipient — verify it charges
+      // exactly the approved amount and commits to this payment request.
+      const decoded = assertInvoiceAmount(invoiceData.pr, millisats);
+
+      if (!invoiceCommitsTo(decoded, [params.metadata])) {
+        throw new Error('Invoice does not match this payment request. Payment cancelled.');
+      }
+
+      setInvoice(invoiceData.pr);
     } catch (error) {
       console.error('Error fetching invoice:', error);
       toast({

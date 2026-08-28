@@ -1,11 +1,11 @@
 # Project Overview
 
-This project is a Nostr client application built with React 18.x, TailwindCSS 3.x, Vite, shadcn/ui, and Nostrify.
+This project is a Nostr client application built with React 19.x, TailwindCSS 4.x, Vite, shadcn/ui, and Nostrify.
 
 ## Technology Stack
 
-- **React 18.x**: Stable version of React with hooks, concurrent rendering, and improved performance
-- **TailwindCSS 3.x**: Utility-first CSS framework for styling
+- **React 19.x**: hooks, concurrent rendering, ref-as-prop
+- **TailwindCSS 4.x**: utility-first styling
 - **Vite**: Fast build tool and development server
 - **shadcn/ui**: Unstyled, accessible UI components built with Radix UI and Tailwind
 - **Nostrify**: Nostr protocol framework for Deno and web
@@ -101,7 +101,7 @@ The project uses shadcn/ui components located in `@/components/ui`. These are un
 - **Toggle**: Two-state button
 - **Tooltip**: Informational text that appears on hover
 
-These components follow a consistent pattern using React's `forwardRef` and use the `cn()` utility for class name merging. Many are built on Radix UI primitives for accessibility and customized with Tailwind CSS.
+These components follow a consistent React 19 pattern: plain function components that type props via `React.ComponentProps<...>` and forward `ref` as a normal prop (no `React.forwardRef`), tag their root with a `data-slot` attribute, and merge classes with the `cn()` utility. Components built on Radix import from the unified `radix-ui` package (e.g. `import { Dialog as DialogPrimitive } from "radix-ui"`), not individual `@radix-ui/react-*` packages.
 
 ## System Prompt Management
 
@@ -397,7 +397,7 @@ function useSpecificRelay() {
   const { nostr } = useNostr();
 
   // Connect to a specific relay
-  const relay = nostr.relay('wss://relay.damus.io');
+  const relay = nostr.relay('wss://relay.ditto.pub');
 
   // Query from this specific relay only
   const events = await relay.query([{ kinds: [1], limit: 20 }]);
@@ -419,7 +419,7 @@ function useRelayGroup() {
 
   // Create a group of specific relays
   const relayGroup = nostr.group([
-    'wss://relay.damus.io',
+    'wss://relay.ditto.pub',
     'wss://relay.primal.net',
     'wss://nos.lol'
   ]);
@@ -904,9 +904,11 @@ const defaultConfig: AppConfig = {
   theme: "light",
   relayMetadata: {
     relays: [
+      { url: 'wss://relay.patrickulrich.com', read: true, write: true },
       { url: 'wss://relay.ditto.pub', read: true, write: true },
-      { url: 'wss://relay.primal.net', read: true, write: true },
-      { url: 'wss://relay.damus.io', read: true, write: true },
+      { url: 'wss://relay.dreamith.to', read: true, write: true },
+      { url: 'wss://relay.primal.net', read: false, write: true },
+      { url: 'wss://nos.lol', read: false, write: true },
     ],
     updatedAt: 0,
   },
